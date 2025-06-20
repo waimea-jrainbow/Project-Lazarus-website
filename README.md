@@ -1,62 +1,12 @@
-# A Basic Flask App Linked to a Turso Database
+# Lazarus codex
 
-This is template for a simple [Flask](https://flask.palletsprojects.com) application with a [Turso](https://turso.tech/) SQLite database to store and provide data. The app uses [Jinja2](https://jinja.palletsprojects.com/templates/) templating for structuring pages and data, and [PicoCSS](https://picocss.com/) for styling.
-
-## Project Structure
-
-- **app** folder
-
-    - **static** folder - Files to be served as-is
-        - **css** folder
-            - **styles.css** - A user stylesheet
-        - **images** folder
-            - **icon.svg** - Site favicon
-            - *other example images*
-        - **js** folder
-            - **utils.js** - Utility functions
-
-    - **templates** folder
-        - **components** folder
-            - **messages.jinja** - Block to display flash messages
-            - *other component templates*
-        - **pages** folder
-            - **base.jinja** - The base template for all pages
-            - *other templates for specific pages*
-
-    - **helpers** folder - Utility functions
-        - **db.py** - Functions for database access
-        - **errors.py** - Functions for error reporting
-        - **session.py** - Functions to manage session data
-        - **time.py** - Functions to help format timestamps
-
-    - **\_\_init__.py** - App launcher code
-
-- **requirements.txt** - Defines the Python modules needed
-
-- **.env** - Environment variable, e.g. Turso secrets
-- **.env-example** - Demo .env file
-- **.gitignore** - Prevents venv and .env from being pushed
+## A website that lays out information about project lazarus
+Project lazarus is a roblox game based on call of duty zombies. I will be pulling information from the Lazarus fandom page however there are some things that I and my friends who play the game wish were available.
 
 
-## Demo Database Schema
-
-The database used for this demo has the following schema:
-
-```sql
-CREATE TABLE `things` (
-    `id`         INTEGER PRIMARY KEY AUTOINCREMENT,
-    `name`       TEXT    NOT NULL,
-    `price`      INTEGER NOT NULL DEFAULT 0
-);
-```
+This website will:
+* Have a introduction homepage with an updates feed and links to project lazarus related pages like the roblox page and the official discord
+* A page attached to a database that will list all the weapons in the game and the ability to open a detailed page for each separate weapon and must include how many rounds it will last
+* A calculator for the damage dealt by weapons when multiplied by different multipliers 
 
 
-## Project Setup and Deployment
-
-See [SETUP.md](SETUP.md) for details of how to install and run the app locally for development, how to setup and configure the [Turso](https://turso.tech/) database, and how to deploy the app to [Render](https://render.com/) for hosting.
-
-## Demo Site
-
-A demo of this site is hosted [here](https://flask-turso-basic-app-setup.onrender.com)
-
-*Note: This is a read-only version to avoid the DB being spammed!*
