@@ -2,19 +2,14 @@
   User stylesheet - Building upon PicoCSS
 =====================================================*/
 
-
-/* ABOUT PAGE -------------------------------------------- */
-
-#tech-stack {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
+.pico header{
+    background-color:black;
 }
 
-#tech-stack article {
-    flex: 1;
+.pico nav{
+    margin-left: 15%;
+    margin-right: 15%;
 }
-
 
 /* MESSAGES -------------------------------------------- */
 

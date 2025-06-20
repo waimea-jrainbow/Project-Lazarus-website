@@ -41,7 +41,7 @@ def about():
 #-----------------------------------------------------------
 # Things page route - Show all the things, and new thing form
 #-----------------------------------------------------------
-@app.get("/things/")
+@app.get("/weapons/")
 def show_all_things():
     with connect_db() as client:
         # Get all the things from the DB
@@ -57,7 +57,7 @@ def show_all_things():
 #-----------------------------------------------------------
 # Thing page route - Show details of a single thing
 #-----------------------------------------------------------
-@app.get("/thing/<int:id>")
+@app.get("/weapon/<int:id>")
 def show_one_thing(id):
     with connect_db() as client:
         # Get the thing details from the DB
