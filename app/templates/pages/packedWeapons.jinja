@@ -16,17 +16,17 @@
 
 {% block content %}
 
-    <h1>Things...</h1>
+    <h1>Weapons</h1>
 
 
     <article>
 
         <ul>
-            {% for thing in things %}
+            {% for weapon in weapons %}
 
                 <li>
-                    <a href="/thing/{{ thing.id }}">
-                        {{ thing.name }}
+                    <a href="/weapon/{{ weapon.id }}">
+                        {{ weapon.name }}
                     </a>
                 </li>
 

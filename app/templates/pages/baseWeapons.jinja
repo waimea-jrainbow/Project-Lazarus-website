@@ -1,0 +1,43 @@
+{#=====================================================
+  Things list page
+  - List of things passed in as 'things' array
+  - Form for adding a new thing
+=====================================================#}
+
+{% extends 'pages/base.jinja' %}
+
+
+{% block title %}
+
+    Flask Demo - All Things
+
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>Weapons</h1>
+
+
+    <article>
+
+        <ul>
+            {% for weapon in weapons %}
+
+                <li>
+                    <a href="/weapon/{{ weapon.id }}">
+                        {{ weapon.name }}
+                    </a>
+                </li>
+
+            {% else %}
+
+                <p>None!</p>
+
+            {% endfor %}
+        </ul>
+
+    </article>
+
+{% endblock %}
+
