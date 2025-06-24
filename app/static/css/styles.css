@@ -90,3 +90,11 @@ body{
   height: 2.2vh;
 }
 
+.welcome-container{
+  display: flex;
+  justify-self: flex-end;
+  height: 50%;
+  width: 100% ;
+  flex-wrap: wrap;
+
+}
