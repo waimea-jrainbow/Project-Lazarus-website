@@ -11,8 +11,20 @@
     margin-right: 10%;
 }
 
+html{
+  padding: 0;
+  background-color: #101012;
+}
 
+main{
+  padding: 0;
+  margin: 0;
+  background-color: #1e1e20;
+}
 
+p{
+  color:black ;
+}
 /* MESSAGES -------------------------------------------- */
 
 #messages ul {
@@ -48,6 +60,8 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+
+  margin-top: -2rem;
 }
 
 /* Place text in the middle of the image */
@@ -71,7 +85,7 @@ body{
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: #101012;
+  background-color: #050505;
 }
 
 /** SEPARATORS **********************************/
@@ -92,9 +106,9 @@ body{
 
 .welcome-container{
   display: flex;
-  justify-self: flex-end;
+  justify-content: flex-end;
   height: 50%;
-  width: 100% ;
+  width: 20% ;
   flex-wrap: wrap;
 
 }
