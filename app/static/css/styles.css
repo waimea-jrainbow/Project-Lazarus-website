@@ -71,6 +71,7 @@ body{
   position: sticky;
   top: 0;
   z-index: 1000;
+  background-color: #101012;
 }
 
 /** SEPARATORS **********************************/
@@ -82,7 +83,7 @@ body{
 
 .generic-separator {
   background-color: #c52f21;
-  border: 0.5vh solid #000000;
+  border: 0.5vh solid #101012;
   border-left: 0;
   border-right: 0;
   padding-top: 2px;
