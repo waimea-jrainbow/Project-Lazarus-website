@@ -12,11 +12,12 @@ Base template
 
 <!DOCTYPE html>
 
-<html lang="en" data-theme="light" class="pico">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
 
     <link rel="icon" href="/static/images/icon.svg">
 
@@ -30,11 +31,11 @@ Base template
 
 </head>
 
-<body class="pico">
+<body>
 
 
 
-    <header  id="main-nav">
+    <header id="main-nav" class="pico">
         <nav class="pico">
             <ul>
                 <li><strong><a href="/">Lazarus codex</a></strong></li>
@@ -42,15 +43,14 @@ Base template
 
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/weapons">Base weapons</a></li>
-                <li><a href="/packedWeapons">Packed weapons</a></li>
+                <li><a href="/weapons">Weapons</a></li>
                 <li><a href="/calculators">Calculators</a></li>
             </ul>
         </nav>
     </header>
 
 
-    <main class="pico">
+    <main>
 
         {% block content %}
 
