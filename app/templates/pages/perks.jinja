@@ -1,0 +1,33 @@
+{#=====================================================
+  Thing page
+  - Shows details of a single thing
+  - Has a delete link to remove it
+=====================================================#}
+
+{% extends 'pages/base.jinja' %}
+
+
+{% block title %}
+
+    {{ thing.name }}
+
+{% endblock %}
+
+
+{% block content %}
+
+    <article>
+
+        <header>
+            <h3>{{ thing.name }}</h3>
+        </header>
+
+        <p>Price: <strong>${{ thing.price }}</strong></p>
+
+    </article>
+
+
+    <a role="button" href="/things">Back to Thing List</a>
+
+{% endblock %}
+

@@ -81,12 +81,4 @@ CREATE TABLE `weapons` (
 
 ```
 
-## Project Setup and Deployment
 
-See [SETUP.md](SETUP.md) for details of how to install and run the app locally for development, how to setup and configure the [Turso](https://turso.tech/) database, and how to deploy the app to [Render](https://render.com/) for hosting.
-
-## Demo Site
-
-A demo of this site is hosted [here](https://flask-turso-basic-app-setup.onrender.com)
-
-_Note: This is a read-only version to avoid the DB being spammed!_
