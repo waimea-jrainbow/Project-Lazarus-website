@@ -101,7 +101,26 @@ h1,h2,h3,h4,h5,h6,p {
   font-size: 3.8vh;
 }
 
+/* HOME PAGE LINKS -------------------------------------------- */
+.links-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
 
+
+#weapons-image-link {
+  border: 20px solid #101012;
+  display: flex;
+  width: fit-content;
+}
+
+#calculators-image-link {
+  border: 20px solid #101012;
+  display: flex;
+  width: fit-content;
+}
 /* NAVIGATION -------------------------------------------- */
 #main-nav {
   position: sticky;
