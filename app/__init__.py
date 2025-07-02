@@ -55,15 +55,15 @@ def show_all_things():
 def show_one_thing(id):
     with connect_db() as client:
         # Get the thing details from the DB
-        sql = "SELECT id, name, price, magazineSize, totalAmmo, damage, rpm, notes, price, image FROM weapons WHERE id=?"
+        sql = "SELECT id, name, price, magazineSize, totalAmmo, damage, rpm, notes, price, image, gamepass FROM weapons WHERE id=?"
         params = [id]
         result = client.execute(sql, params)
         weapons = result.rows
-        # Did we get a result?
         if result.rows:
-            # yes, so show it on the page
             weapon = result.rows[0]
-            return render_template("pages/weapon.jinja", weapon=weapon)
+            gamepass = "is" if weapon['gamepass'] == 1 else "not"
+            return render_template("pages/weapon.jinja", weapon=weapon, gamepass=gamepass)
+        
 
         else:
             # No, so show error
