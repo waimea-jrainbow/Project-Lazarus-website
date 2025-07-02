@@ -4,6 +4,7 @@
 
 from flask import Flask, render_template, request, flash, redirect
 import html
+import math
 
 from app.helpers.session import init_session
 from app.helpers.db      import connect_db
@@ -57,7 +58,7 @@ def show_one_thing(id):
         sql = "SELECT id, name, price, magazineSize, totalAmmo, damage, rpm, notes, price, image FROM weapons WHERE id=?"
         params = [id]
         result = client.execute(sql, params)
-
+        weapons = result.rows
         # Did we get a result?
         if result.rows:
             # yes, so show it on the page
@@ -67,5 +68,54 @@ def show_one_thing(id):
         else:
             # No, so show error
             return not_found_error()
+
+
+#-----------------------------------------------------------
+# Calculator page
+# Major help from AI here not proud of that but I did what I can to make it my own and understand how it works
+#-----------------------------------------------------------
+
+@app.route('/calculator', methods=['GET', 'POST'])
+def showCalculator():
+    result = None
+    error = None
+
+    if request.method == 'POST':
+        weapon_name = request.form.get('weapon_name', '').strip()
+        double_tap = request.form.get('double_tap') == 'on'
+        
+        with connect_db() as client:
+            sql = "SELECT name, damage, headshotMultiplier FROM weapons WHERE LOWER(name) = LOWER(?)"
+            params = (weapon_name,)
+            result = client.execute(sql, params)
+            weapon = result.rows if hasattr(result, 'rows') else []
+            # print(f"weapon type: {type(weapon)}") # debugging
+            # print(f"weapon result: {weapon}") # debugging
+        if weapon:
+            damage = weapon[0]['damage']
+            headshotMultiplier = weapon[0]['headshotMultiplier']
+            result = max_one_shot_round(damage, double_tap, headshotMultiplier)
+        else:
+            error = f"Weapon '{weapon_name}' not found in database."
+
+    return render_template('pages/calculator.jinja', result=result, error=error)
+#---- Function to calculate the max round a gun can reach -------------------------------------------------------
+def max_one_shot_round(damage, double_tap,  headshotMultiplier ):
+    effective_damage =(damage * (2 if double_tap else 1) * headshotMultiplier)
+    print(damage, effective_damage, double_tap, headshotMultiplier)
+    if effective_damage < 50:
+        return 0
+    if effective_damage <= 1050:
+        return int(round((effective_damage - 50) / 100))
+    else:
+        return int(round((math.log(effective_damage / 950)) / math.log(1.1) + 9, 0))
+
+
+
+
+
+
+
+
 
 

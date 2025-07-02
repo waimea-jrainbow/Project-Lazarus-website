@@ -1,0 +1,42 @@
+{#=====================================================
+Home page
+- Hero style greeting banner
+- List of things passed in as 'things' array
+- Form for adding a new thing
+=====================================================#}
+
+{% extends 'pages/base.jinja' %}
+
+
+{% block title %}
+
+Lazarus Codex
+
+{% endblock %}
+
+
+{% block content %}
+
+<h1 id="title">Project Lazarus: Weapon One-Shot Round Calculator</h1>
+<h5>This calculator will tell you what round a gun of your choice will one-shot the zombies till, Once a gun no longer one-shots it is probably a good time to change gun.</h5>
+<h2 id="subtitle">This calculator assumes you are getting headshots as you should be.</h2>
+<form method="POST">
+  <label for="weapon_name">Enter weapon name:</label><br>
+  <input type="text" name="weapon_name" id="weapon_name" required><br><br>
+
+  <input type="checkbox" id="double_tap" name="double_tap">
+  <label for="double_tap">I have Double Tap Root Beer</label><br><br>
+
+  <input type="submit" value="Calculate">
+</form>
+
+{% if result %}
+<p>The weapon can one-shot zombies up to <strong>Round {{ result }}</strong>.</p>
+{% elif error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+
+
+
+
+{% endblock %}
