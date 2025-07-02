@@ -38,7 +38,7 @@ def index():
 def show_all_things():
     with connect_db() as client:
         # Get all the things from the DB
-        sql = "SELECT id, name, image FROM weapons ORDER BY id ASC"
+        sql = "SELECT id, name, image, class FROM weapons ORDER BY id ASC"
         params = []
         result = client.execute(sql, params)
         weapons = result.rows
