@@ -1,7 +1,7 @@
 {#=====================================================
-  Things list page
-  - List of things passed in as 'things' array
-  - Form for adding a new thing
+Things list page
+- List of things passed in as 'things' array
+- Form for adding a new thing
 =====================================================#}
 
 {% extends 'pages/base.jinja' %}
@@ -9,35 +9,31 @@
 
 {% block title %}
 
-    Flask Demo - All Things
+Flask Demo - All Things
 
 {% endblock %}
 
 
 {% block content %}
 
-    <h1>Weapons</h1>
+<h1 id="title">Weapons</h1>
 
 
-    <article>
-
-        <ul>
+<article class="handguns-list">
+    <h1>Handguns</h1>
+    <table>
+        <tr>
             {% for weapon in weapons %}
-
-                <li>
-                    <a href="/weapon/{{ weapon.id }}">
-                        {{ weapon.name }}
-                    </a>
-                </li>
-
-            {% else %}
-
-                <p>None!</p>
-
+            <td class="weapon-cell pico">
+                <a href="/weapon/{{ weapon.id }}">
+                    {{ weapon.name }}<br>
+                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                </a>
+            </td>
             {% endfor %}
-        </ul>
+        </tr>
+    </table>
 
-    </article>
+</article>
 
 {% endblock %}
-

@@ -1,7 +1,7 @@
 {#=====================================================
-  Thing page
-  - Shows details of a single thing
-  - Has a delete link to remove it
+Thing page
+- Shows details of a single thing
+- Has a delete link to remove it
 =====================================================#}
 
 {% extends 'pages/base.jinja' %}
@@ -9,25 +9,37 @@
 
 {% block title %}
 
-    {{ thing.name }}
+{{ weapon.name }}
 
 {% endblock %}
 
 
 {% block content %}
 
-    <article>
+<article class="weapon-details">
 
-        <header>
-            <h3>{{ thing.name }}</h3>
-        </header>
+    <header>
+        <h1 id="title">{{ weapon.name }}</h1>
+    </header>
 
-        <p>Price: <strong>${{ thing.price }}</strong></p>
+    <p>Price: <strong>${{ weapon.price }}</strong></p>
+    <p>Magazine Size: <strong>{{ weapon.magazineSize }}</strong></p>
+    <p>Total Ammo: <strong>{{ weapon.totalAmmo }}</strong></p>
+    <p>Damage: <strong>{{ weapon.damage }}</strong></p>
+    <p>RPM: <strong>{{ weapon.rpm }}</strong></p>
+    <p>Notes: <strong>{{ weapon.notes }}</strong></p>
 
-    </article>
+    {% if weapon.image %}
+    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+    {% else %}
+    <p>No image available</p>
+    {% endif %}
 
 
-    <a role="button" href="/things">Back to Thing List</a>
+
+</article>
+
+
+<a role="button" href="/things">Back to Thing List</a>
 
 {% endblock %}
-
