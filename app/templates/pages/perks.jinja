@@ -1,7 +1,6 @@
 {#=====================================================
-  Thing page
-  - Shows details of a single thing
-  - Has a delete link to remove it
+Perks page
+Shows a list of perks available in the game and details about each
 =====================================================#}
 
 {% extends 'pages/base.jinja' %}
@@ -9,25 +8,64 @@
 
 {% block title %}
 
-    {{ thing.name }}
+Perks - Project Lazarus
 
 {% endblock %}
 
 
 {% block content %}
+<article id="perks-header">
 
-    <article>
+    <header>
+        <h1 id="title">Perks</h1>
+        <h5>Perks are special abilities that can enhance your gameplay experience.</h5>
+        <h5>Perks come from perk machines which are vending machines placed around the map that can be accessed after
+            the power is restored each perk costs a different amount of points.</h5>
+        <h5>Perks are lost after the player is downed and so you will have to purchase them again. Players can have a
+            maximum of four perks. Their perks are listed in the bottom left of the screen. When reaching the limit, the
+            player will be unable to purchase more . </h5>
+    </header>
 
-        <header>
-            <h3>{{ thing.name }}</h3>
-        </header>
+    <p>Here is a list of perks available in the game:</p>
 
-        <p>Price: <strong>${{ thing.price }}</strong></p>
-
-    </article>
+</article>
 
 
-    <a role="button" href="/things">Back to Thing List</a>
+
+<article id="perks-list">
+
+    <table class="perks-table pico">
+        <thead>
+            <tr>
+                <th>Icon</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Machine</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for perk in perks %}
+            <tr>
+                <td>
+                    <img src="{{ perk.icon }}" alt="{{ perk.name }}" class="perk-icon">
+                </td>
+                <td>
+                    {{ perk.name }}
+                </td>
+                <td class="perk-description">
+                    {{ perk.description }}
+                </td>
+                <td>
+                    <img src="{{ perk.machine }}" alt="{{ perk.name }}" class="perk-machine">
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</article>
+
+
+
 
 {% endblock %}
-

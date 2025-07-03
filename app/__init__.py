@@ -36,7 +36,7 @@ def index():
 # Things page route - Show all the things, and new thing form
 #-----------------------------------------------------------
 @app.get("/weapons/")
-def show_all_things():
+def show_all_weapons():
     with connect_db() as client:
         # Get all the things from the DB
         sql = "SELECT id, name, image, class FROM weapons ORDER BY id ASC"
@@ -111,7 +111,23 @@ def max_one_shot_round(damage, double_tap,  headshotMultiplier ):
         return int(round((math.log(effective_damage / 950)) / math.log(1.1) + 9, 0))
 
 
+#-----------------------------------------------------------
+# Calculator page
 
+#-----------------------------------------------------------
+
+@app.get("/perks/")
+def show_all_perks():
+    with connect_db() as client:
+        # Get all the things from the DB
+        sql = "SELECT id, name, price, description, icon, machine FROM perks ORDER BY id ASC"
+        params = []
+        result = client.execute(sql, params)
+        perks = result.rows
+
+        # And show them on the page
+        return render_template("pages/perks.jinja", perks=perks)
+    
 
 
 

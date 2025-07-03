@@ -12,6 +12,11 @@
     
 }
 
+#codexLogo{
+    width: 6vw;
+    height: 6vh;
+
+}
 
 html{
   padding: 0;
@@ -29,6 +34,7 @@ html{
 
 main{
   padding: 0;
+  padding-bottom: 1vh;
   margin: 0;
   background-color: #1e1e20;
 }
@@ -40,7 +46,7 @@ body{
 
 /* TEXT -------------------------------------------- */
 
-h1,h2,h3,h4,h5,h6,p {
+h1,h2,h3,h4,h5,h6,p, label {
   color: #f5f5f5;
   text-align: center;
 }
@@ -232,10 +238,10 @@ h1,h2,h3,h4,h5,h6,p {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   border-top: #000000 solid 3px;
+  border-bottom: #000000 solid 3px;
   gap: 3vw;
-  width: 100%;
-  box-sizing: border-box;
   padding: 2vw;
+  width: 100%;
 }
 
  #button{
@@ -273,4 +279,49 @@ h1,h2,h3,h4,h5,h6,p {
   flex-direction: column;
 }
 
+/* CALCULATOR --------------------------------------------------------------------------- */
+#calculatorSubmit{
+  display: inline-block;
+  padding: 1vh 2vw;
+  background-color: #101012;
+  color: #f5f5f5;
+  text-decoration: none;
+  border-radius: 10px;
+  border: #101012 solid 3px;
+  font-size: 2vh;
+}
 
+/* PERKS --------------------------------------------------------------------------- */
+
+#perks-list {
+  background-color: #101012;
+  border: #101012 solid 3px;
+  border-radius: 10px;
+  padding: 2vh;
+  margin-bottom: 2vh ;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60vw;
+  overflow-x: auto;
+}
+
+#perks-list table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 2vw 2vh;
+}
+
+#perks-list th, 
+#perks-list td {
+  background-color: #101012;
+  border: #101012 solid 3px;
+  border-radius: 2vh;
+  text-align: center;
+  vertical-align: middle;
+  color: #f5f5f5;
+  padding: 1vh 0;
+  min-width: 10vw;
+  height: 5vh;
+  box-sizing: border-box;
+  transition: transform 0.3s ease;
+}
