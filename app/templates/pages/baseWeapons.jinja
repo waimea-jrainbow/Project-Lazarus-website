@@ -17,6 +17,7 @@ Flask Demo - All Things
 {% block content %}
 
 <h1 id="title">Weapons</h1>
+<h6>Not all upgraded guns are added to this it is a work in progress :)</h6>
 
 
 <article>
@@ -41,6 +42,125 @@ Flask Demo - All Things
     <div class="grid">
             {% for weapon in weapons %}
             {% if weapon.class == 'subMachineGun' %}
+            <div class="weapon-cell pico">
+                <a href="/weapon/{{ weapon.id }}">
+                    {{ weapon.name }}<br>
+                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+
+</article>
+
+<article>
+    <h1 id="subtitle">Assault rifles</h1>
+    <div class="grid">
+            {% for weapon in weapons %}
+            {% if weapon.class == 'assaultRifle' %}
+            <div class="weapon-cell pico">
+                <a href="/weapon/{{ weapon.id }}">
+                    {{ weapon.name }}<br>
+                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+
+</article>
+
+<article>
+    <h1 id="subtitle">Shotguns</h1>
+    <div class="grid">
+            {% for weapon in weapons %}
+            {% if weapon.class == 'shotgun' %}
+            <div class="weapon-cell pico">
+                <a href="/weapon/{{ weapon.id }}">
+                    {{ weapon.name }}<br>
+                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+
+</article>
+
+<article>
+    <h1 id="subtitle">Snipers</h1>
+    <div class="grid">
+            {% for weapon in weapons %}
+            {% if weapon.class == 'sniper' %}
+            <div class="weapon-cell pico">
+                <a href="/weapon/{{ weapon.id }}">
+                    {{ weapon.name }}<br>
+                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+
+</article>
+
+<article>
+    <h1 id="subtitle">Battle rifle</h1>
+    <div class="grid">
+            {% for weapon in weapons %}
+            {% if weapon.class == 'battleRifle' %}
+            <div class="weapon-cell pico">
+                <a href="/weapon/{{ weapon.id }}">
+                    {{ weapon.name }}<br>
+                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+
+</article>
+
+<article>
+    <h1 id="subtitle">Light machine guns</h1>
+    <div class="grid">
+            {% for weapon in weapons %}
+            {% if weapon.class == 'lightMachineGun' %}
+            <div class="weapon-cell pico">
+                <a href="/weapon/{{ weapon.id }}">
+                    {{ weapon.name }}<br>
+                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+
+</article>
+
+<article>
+    <h1 id="subtitle">Launchers</h1>
+    <div class="grid">
+            {% for weapon in weapons %}
+            {% if weapon.class == 'launcher' %}
+            <div class="weapon-cell pico">
+                <a href="/weapon/{{ weapon.id }}">
+                    {{ weapon.name }}<br>
+                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+
+</article>
+
+<article>
+    <h1 id="subtitle">Wonder weapons</h1>
+    <div class="grid">
+            {% for weapon in weapons %}
+            {% if weapon.class == 'wonderWeapon' %}
             <div class="weapon-cell pico">
                 <a href="/weapon/{{ weapon.id }}">
                     {{ weapon.name }}<br>
