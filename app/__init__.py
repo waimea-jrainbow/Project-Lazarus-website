@@ -52,7 +52,7 @@ def show_all_weapons():
 # Thing page route - Show details of a single thing
 #-----------------------------------------------------------
 @app.get("/weapon/<int:id>")
-def show_one_thing(id):
+def show_one_weapon(id):
     with connect_db() as client:
         # Get the thing details from the DB
         sql = "SELECT id, name, price, magazineSize, totalAmmo, damage, rpm, notes, price, image, gamepass FROM weapons WHERE id=?"
@@ -63,6 +63,23 @@ def show_one_thing(id):
             weapon = result.rows[0]
             gamepass = "is" if weapon['gamepass'] == 1 else "not"
             return render_template("pages/weapon.jinja", weapon=weapon, gamepass=gamepass)
+        
+
+        else:
+            # No, so show error
+            return not_found_error()
+
+@app.get("/upgradedWeapon/<int:id>")
+def show_one_packed_weapon(id):
+    with connect_db() as client:
+        # Get the thing details from the DB
+        sql = "SELECT * FROM packedWeapons WHERE baseWeaponId = ?"
+        params = [id]
+        result = client.execute(sql, params)
+        weapons = result.rows
+        if result.rows:
+            weapon = result.rows[0]
+            return render_template("pages/packedWeapon.jinja", weapon=weapon)
         
 
         else:

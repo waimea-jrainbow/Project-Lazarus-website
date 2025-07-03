@@ -22,13 +22,12 @@ Thing page
         <h1 id="title">{{ weapon.name }}</h1>
     </header>
 
-    <p>Price: <strong>${{ weapon.price }}</strong></p>
     <p>Magazine Size: <strong>{{ weapon.magazineSize }}</strong></p>
     <p>Total Ammo: <strong>{{ weapon.totalAmmo }}</strong></p>
     <p>Damage: <strong>{{ weapon.damage }}</strong></p>
     <p>RPM: <strong>{{ weapon.rpm }}</strong></p>
+    <p>Module: <strong>{{ weapon.module }} </strong></p>
     <p>Notes: <strong>{{ weapon.notes }}</strong></p>
-    <p>This gun {{ gamepass }} from a gamepass</p>
 
     {% if weapon.image %}
     <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
@@ -36,7 +35,7 @@ Thing page
     <p>No image available</p>
     {% endif %}
 
-    <a id="button" href="/upgradedWeapon/{{ weapon.id }}">View Upgraded Version</a>
+
 
 </article>
 
