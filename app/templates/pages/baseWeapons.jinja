@@ -36,4 +36,21 @@ Flask Demo - All Things
 
 </article>
 
+<article>
+    <h1 id="subtitle">Sub machine guns</h1>
+    <div class="grid">
+            {% for weapon in weapons %}
+            {% if weapon.class == 'subMachineGun' %}
+            <div class="weapon-cell pico">
+                <a href="/weapon/{{ weapon.id }}">
+                    {{ weapon.name }}<br>
+                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+
+</article>
+
 {% endblock %}
