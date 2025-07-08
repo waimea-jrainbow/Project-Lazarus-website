@@ -2,7 +2,7 @@
 # App Creation and Launch
 #===========================================================
 
-from flask import Flask, render_template, request, flash, redirect
+from flask import Flask, render_template, request, flash, redirect, jsonify
 import html
 import math
 
@@ -76,7 +76,7 @@ def show_one_packed_weapon(id):
         sql = "SELECT * FROM packedWeapons WHERE baseWeaponId = ?"
         params = [id]
         result = client.execute(sql, params)
-        weapons = result.rows
+        weapon = result.rows
         if result.rows:
             weapon = result.rows[0]
             return render_template("pages/packedWeapon.jinja", weapon=weapon)
@@ -100,26 +100,37 @@ def showCalculator():
     if request.method == 'POST':
         weapon_name = request.form.get('weapon_name', '').strip()
         double_tap = request.form.get('double_tap') == 'on'
-        
-        with connect_db() as client:
-            sql = "SELECT name, damage, headshotMultiplier FROM weapons WHERE LOWER(name) = LOWER(?)"
-            params = (weapon_name,)
-            result = client.execute(sql, params)
-            weapon = result.rows if hasattr(result, 'rows') else []
-            # print(f"weapon type: {type(weapon)}") # debugging
-            # print(f"weapon result: {weapon}") # debugging
-        if weapon:
-            damage = weapon[0]['damage']
-            headshotMultiplier = weapon[0]['headshotMultiplier']
-            result = max_one_shot_round(damage, double_tap, headshotMultiplier)
+        weapon = []
+        if weapon_name:
+            with connect_db() as client:
+                # Try to find the weapon in packedWeapons first
+                sql_packed = "SELECT packedName AS name, damage, headshotMultiplier, extraDamage FROM packedWeapons WHERE LOWER(packedName) = LOWER(?)"
+                params = [weapon_name]
+                result_packed = client.execute(sql_packed, params)
+                if hasattr(result_packed, 'rows') and result_packed.rows:
+                    weapon = result_packed.rows
+                else:
+                    # If not found in packedWeapons, try weapons table
+                    sql_base = "SELECT name, damage, headshotMultiplier, extraDamage FROM weapons WHERE LOWER(name) = LOWER(?)"
+                    result_base = client.execute(sql_base, params)
+                    if hasattr(result_base, 'rows'):
+                        weapon = result_base.rows
+
+            if weapon:
+                damage = weapon[0]['damage']
+                headshotMultiplier = weapon[0]['headshotMultiplier']
+                extraDamage = weapon[0]['extraDamage']
+                result = max_one_shot_round(damage, double_tap, headshotMultiplier, extraDamage)
+            else:
+                error = f"Weapon '{weapon_name}' not found in weapon database."
         else:
-            error = f"Weapon '{weapon_name}' not found in database."
+            error = "Please enter a weapon name."
 
     return render_template('pages/calculator.jinja', result=result, error=error)
 #---- Function to calculate the max round a gun can reach -------------------------------------------------------
-def max_one_shot_round(damage, double_tap,  headshotMultiplier ):
-    effective_damage =(damage * (2 if double_tap else 1) * headshotMultiplier)
-    print(damage, effective_damage, double_tap, headshotMultiplier)
+def max_one_shot_round(damage, double_tap,  headshotMultiplier,extraDamage ):
+    effective_damage =((damage + extraDamage) * (2 if double_tap else 1) * headshotMultiplier )
+    # print(damage, effective_damage, double_tap, headshotMultiplier)
     if effective_damage < 50:
         return 0
     if effective_damage <= 1050:
@@ -128,8 +139,40 @@ def max_one_shot_round(damage, double_tap,  headshotMultiplier ):
         return int(round((math.log(effective_damage / 950)) / math.log(1.1) + 9, 0))
 
 
+#---- Function to calculate the max round a gun can reach -------------------------------------------------------
+@app.get("/autocomplete")
+def autocomplete_weapon_names():
+    query = request.args.get("query", "").strip().lower()
+
+    if not query:
+        return jsonify([])
+
+    weapon_names = []
+
+    with connect_db() as client:
+        # Get base weapon names
+        sql_base = """
+        SELECT name FROM weapons 
+        WHERE LOWER(name) LIKE ?
+        """
+        params = [f"{query}%"]
+        result_base = client.execute(sql_base, params)
+        weapon_names += [row["name"] for row in result_base.rows]
+
+        # Get packed weapon names
+        sql_packed = """
+        SELECT packedName FROM packedWeapons
+        WHERE LOWER(packedName) LIKE ?
+        """
+        result_packed = client.execute(sql_packed, params)
+        weapon_names += [row["packedName"] for row in result_packed.rows]
+
+    # Remove duplicates and sort
+    weapon_names = sorted(list(set(weapon_names)))[:10]
+
+    return jsonify(weapon_names)
 #-----------------------------------------------------------
-# Calculator page
+# perks page
 
 #-----------------------------------------------------------
 

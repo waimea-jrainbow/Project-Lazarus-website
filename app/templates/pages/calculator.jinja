@@ -18,11 +18,15 @@ Lazarus Codex
 {% block content %}
 
 <h1 id="title">Project Lazarus: Weapon One-Shot Round Calculator</h1>
-<h5>This calculator will tell you what round a gun of your choice will one-shot the zombies till, Once a gun no longer one-shots it is probably a good time to change gun.</h5>
-<h2 id="subtitle">This calculator assumes you are getting headshots as you should be.</h2>
+<h5>This calculator will tell you what round a gun of your choice will one-shot the zombies till, Once a gun no longer
+  one-shots it is probably a good time to change gun.</h5>
+<h2 id="subtitle">This calculator assumes you are getting headshots as you should be. <br>This calculator doesn't
+  account for percentage damage increases.</h2>
 <form method="POST">
   <label for="weapon_name">Enter weapon name:</label><br>
-  <input type="text" name="weapon_name" id="weapon_name" required><br><br>
+  <input type="text" name="weapon_name" id="weapon_name" required autocomplete="off">
+  <div id="autocomplete-results"
+    style="border:1px solid #ccc; display:none; position:fixed; background:white; z-index:1000;"></div><br><br>
 
   <input type="checkbox" id="double_tap" name="double_tap">
   <label for="double_tap">I have Double Tap Root Beer</label><br><br>
@@ -31,12 +35,62 @@ Lazarus Codex
 </form>
 
 {% if result %}
-<p>The weapon can one-shot zombies up to <strong>Round {{ result }}</strong>.</p>
+<p>The {{ request.form.weapon_name or weapon_name }} can one-shot zombies up to <strong>Round {{ result }}</strong>.</p>
 {% elif error %}
 <p style="color:red;">{{ error }}</p>
 {% endif %}
 
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const input = document.getElementById('weapon_name');
+    const resultsBox = document.getElementById('autocomplete-results');
 
+    input.addEventListener('input', function () {
+      const query = input.value;
+
+      if (query.length < 2) {
+        resultsBox.style.display = 'none';
+        return;
+      }
+
+      fetch(`/autocomplete?query=${encodeURIComponent(query)}`)
+        .then(response => response.json())
+        .then(data => {
+          resultsBox.innerHTML = '';
+          if (data.length === 0) {
+            resultsBox.style.display = 'none';
+            return;
+          }
+
+          data.forEach(weapon => {
+            const div = document.createElement('div');
+            div.textContent = weapon;
+            div.style.padding = '5px';
+            div.style.cursor = 'pointer';
+
+            div.addEventListener('click', function () {
+              input.value = weapon;
+              resultsBox.style.display = 'none';
+            });
+
+            resultsBox.appendChild(div);
+          });
+
+          const rect = input.getBoundingClientRect();
+          resultsBox.style.top = (rect.bottom) + 'px';
+          resultsBox.style.left = (rect.left) + 'px';
+          resultsBox.style.width = rect.width + 'px';
+          resultsBox.style.display = 'block';
+        });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!resultsBox.contains(e.target) && e.target !== input) {
+        resultsBox.style.display = 'none';
+      }
+    });
+  });
+</script>
 
 {% endblock %}
