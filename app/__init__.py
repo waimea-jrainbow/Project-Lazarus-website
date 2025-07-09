@@ -148,11 +148,12 @@ def max_one_shot_round(damage, double_tap,headshot,  headshotMultiplier,extraDam
         return int(round((math.log(effective_damage / 950)) / math.log(1.1) + 9, 0))
 
 #---- Function to calculate the health of a zombie in a given round ---------------------------------------------
+
 def zombie_health(round_num):
     if round_num < 10:
-        return 50 + 100 * round_num
+        return math.ceil(50 + 100 * round_num)
     else:
-        return 950 * (1.1 ** (round_num - 9))
+        return math.ceil(950 * (1.1 ** (round_num - 9)))
 
 def max_round_iscariots_kiss(double_tap, headshot, headshotMultiplier):
     round_num = 1
