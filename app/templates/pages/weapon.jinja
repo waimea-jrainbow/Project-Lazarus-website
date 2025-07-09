@@ -28,7 +28,7 @@ Thing page
     <p>Damage: <strong>{{ weapon.damage }}</strong></p>
     <p>RPM: <strong>{{ weapon.rpm }}</strong></p>
     <p>Notes: <strong>{{ weapon.notes }}</strong></p>
-    <p>This gun {{ gamepass }} from a gamepass</p>
+    <p>{{ gamepass }}</p>
 
     {% if weapon.image %}
     <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">

@@ -33,13 +33,13 @@ def index():
 
 
 #-----------------------------------------------------------
-# Things page route - Show all the things, and new thing form
+# Weapons page route - Show all the weapons
 #-----------------------------------------------------------
 @app.get("/weapons/")
 def show_all_weapons():
     with connect_db() as client:
         # Get all the things from the DB
-        sql = "SELECT id, name, image, class FROM weapons ORDER BY id ASC"
+        sql = "SELECT id, name, image, class, gamepass FROM weapons ORDER BY id ASC"
         params = []
         result = client.execute(sql, params)
         weapons = result.rows
@@ -49,7 +49,7 @@ def show_all_weapons():
 
 
 #-----------------------------------------------------------
-# Thing page route - Show details of a single thing
+# Weapon page route - Show details of a single weapon
 #-----------------------------------------------------------
 @app.get("/weapon/<int:id>")
 def show_one_weapon(id):
@@ -58,10 +58,10 @@ def show_one_weapon(id):
         sql = "SELECT id, name, price, magazineSize, totalAmmo, damage, rpm, notes, price, image, gamepass FROM weapons WHERE id=?"
         params = [id]
         result = client.execute(sql, params)
-        weapons = result.rows
+        weapon = result.rows
         if result.rows:
             weapon = result.rows[0]
-            gamepass = "is" if weapon['gamepass'] == 1 else "not"
+            gamepass = f"This weapon is not from a gamepass" if weapon['gamepass'] == 'none' else f"This gun is from the {weapon['gamepass']}"
             return render_template("pages/weapon.jinja", weapon=weapon, gamepass=gamepass)
         
 
@@ -155,7 +155,7 @@ def autocomplete_weapon_names():
         SELECT name FROM weapons 
         WHERE LOWER(name) LIKE ?
         """
-        params = [f"{query}%"]
+        params = [f"%{query}%"]
         result_base = client.execute(sql_base, params)
         weapon_names += [row["name"] for row in result_base.rows]
 

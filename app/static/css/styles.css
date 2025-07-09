@@ -294,6 +294,17 @@ h1,h2,h3,h4,h5,h6,p, label {
   display:flex;
   justify-content: center;
 }
+
+.gamepass-star {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.weapon-cell {
+    position: relative;
+}
 /* WEAPON --------------------------------------------------------------------------- */
 
 .weapon-details {

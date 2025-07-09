@@ -17,21 +17,29 @@ Weapons - Lazarus Codex
 {% block content %}
 
 <h1 id="title">Weapons</h1>
-
+<article class="weapon-intro">
+    <p>Welcome to the weapons page, here you can find all the weapons in Project Lazarus.</p>
+    <p>Click on a weapon to see more details about it.</p>
+    <p>A star means the gun is from a gamepass</p>
+</article>
 
 <article>
     <h1 id="subtitle">Handguns</h1>
     <div class="grid">
-            {% for weapon in weapons %}
-            {% if weapon.class == 'handgun' %}
-            <div class="weapon-cell pico">
-                <a href="/weapon/{{ weapon.id }}">
-                    {{ weapon.name }}<br>
-                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
-                </a>
-            </div>
-            {% endif %}
-            {% endfor %}
+        {% for weapon in weapons %}
+        {% if weapon.class == 'handgun' %}
+        <div class="weapon-cell pico">
+            <a href="/weapon/{{ weapon.id }}">
+                {{ weapon.name }}<br>
+                <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                {% if weapon.gamepass != 'none' and weapon.gamepass != '' %}
+                <img src="/static/images/star.png" alt="Requires Gamepass" class="gamepass-star"
+                    title='{{ weapon.gamepass }}'>
+                {% endif %}
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
     </div>
 
 </article>
@@ -39,16 +47,20 @@ Weapons - Lazarus Codex
 <article>
     <h1 id="subtitle">Sub machine guns</h1>
     <div class="grid">
-            {% for weapon in weapons %}
-            {% if weapon.class == 'subMachineGun' %}
-            <div class="weapon-cell pico">
-                <a href="/weapon/{{ weapon.id }}">
-                    {{ weapon.name }}<br>
-                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
-                </a>
-            </div>
-            {% endif %}
-            {% endfor %}
+        {% for weapon in weapons %}
+        {% if weapon.class == 'subMachineGun' %}
+        <div class="weapon-cell pico">
+            <a href="/weapon/{{ weapon.id }}">
+                {{ weapon.name }}<br>
+                <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                {% if weapon.gamepass != 'none' and weapon.gamepass != '' %}
+                <img src="/static/images/star.png" alt="Requires Gamepass" class="gamepass-star"
+                    title='{{ weapon.gamepass }}'>
+                {% endif %}
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
     </div>
 
 </article>
@@ -56,16 +68,20 @@ Weapons - Lazarus Codex
 <article>
     <h1 id="subtitle">Assault rifles</h1>
     <div class="grid">
-            {% for weapon in weapons %}
-            {% if weapon.class == 'assaultRifle' %}
-            <div class="weapon-cell pico">
-                <a href="/weapon/{{ weapon.id }}">
-                    {{ weapon.name }}<br>
-                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
-                </a>
-            </div>
-            {% endif %}
-            {% endfor %}
+        {% for weapon in weapons %}
+        {% if weapon.class == 'assaultRifle' %}
+        <div class="weapon-cell pico">
+            <a href="/weapon/{{ weapon.id }}">
+                {{ weapon.name }}<br>
+                <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                {% if weapon.gamepass != 'none' and weapon.gamepass != '' %}
+                <img src="/static/images/star.png" alt="Requires Gamepass" class="gamepass-star"
+                    title='{{ weapon.gamepass }}'>
+                {% endif %}
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
     </div>
 
 </article>
@@ -73,16 +89,20 @@ Weapons - Lazarus Codex
 <article>
     <h1 id="subtitle">Shotguns</h1>
     <div class="grid">
-            {% for weapon in weapons %}
-            {% if weapon.class == 'shotgun' %}
-            <div class="weapon-cell pico">
-                <a href="/weapon/{{ weapon.id }}">
-                    {{ weapon.name }}<br>
-                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
-                </a>
-            </div>
-            {% endif %}
-            {% endfor %}
+        {% for weapon in weapons %}
+        {% if weapon.class == 'shotgun' %}
+        <div class="weapon-cell pico">
+            <a href="/weapon/{{ weapon.id }}">
+                {{ weapon.name }}<br>
+                <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                {% if weapon.gamepass != 'none' and weapon.gamepass != '' %}
+                <img src="/static/images/star.png" alt="Requires Gamepass" class="gamepass-star"
+                    title='{{ weapon.gamepass }}'>
+                {% endif %}
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
     </div>
 
 </article>
@@ -90,16 +110,20 @@ Weapons - Lazarus Codex
 <article>
     <h1 id="subtitle">Snipers</h1>
     <div class="grid">
-            {% for weapon in weapons %}
-            {% if weapon.class == 'sniper' %}
-            <div class="weapon-cell pico">
-                <a href="/weapon/{{ weapon.id }}">
-                    {{ weapon.name }}<br>
-                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
-                </a>
-            </div>
-            {% endif %}
-            {% endfor %}
+        {% for weapon in weapons %}
+        {% if weapon.class == 'sniper' %}
+        <div class="weapon-cell pico">
+            <a href="/weapon/{{ weapon.id }}">
+                {{ weapon.name }}<br>
+                <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                {% if weapon.gamepass != 'none' and weapon.gamepass != '' %}
+                <img src="/static/images/star.png" alt="Requires Gamepass" class="gamepass-star"
+                    title='{{ weapon.gamepass }}'>
+                {% endif %}
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
     </div>
 
 </article>
@@ -107,16 +131,20 @@ Weapons - Lazarus Codex
 <article>
     <h1 id="subtitle">Battle rifle</h1>
     <div class="grid">
-            {% for weapon in weapons %}
-            {% if weapon.class == 'battleRifle' %}
-            <div class="weapon-cell pico">
-                <a href="/weapon/{{ weapon.id }}">
-                    {{ weapon.name }}<br>
-                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
-                </a>
-            </div>
-            {% endif %}
-            {% endfor %}
+        {% for weapon in weapons %}
+        {% if weapon.class == 'battleRifle' %}
+        <div class="weapon-cell pico">
+            <a href="/weapon/{{ weapon.id }}">
+                {{ weapon.name }}<br>
+                <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                {% if weapon.gamepass != 'none' and weapon.gamepass != '' %}
+                <img src="/static/images/star.png" alt="Requires Gamepass" class="gamepass-star"
+                    title='{{ weapon.gamepass }}'>
+                {% endif %}
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
     </div>
 
 </article>
@@ -124,16 +152,20 @@ Weapons - Lazarus Codex
 <article>
     <h1 id="subtitle">Light machine guns</h1>
     <div class="grid">
-            {% for weapon in weapons %}
-            {% if weapon.class == 'lightMachineGun' %}
-            <div class="weapon-cell pico">
-                <a href="/weapon/{{ weapon.id }}">
-                    {{ weapon.name }}<br>
-                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
-                </a>
-            </div>
-            {% endif %}
-            {% endfor %}
+        {% for weapon in weapons %}
+        {% if weapon.class == 'lightMachineGun' %}
+        <div class="weapon-cell pico">
+            <a href="/weapon/{{ weapon.id }}">
+                {{ weapon.name }}<br>
+                <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                {% if weapon.gamepass != 'none' and weapon.gamepass != '' %}
+                <img src="/static/images/star.png" alt="Requires Gamepass" class="gamepass-star"
+                    title='{{ weapon.gamepass }}'>
+                {% endif %}
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
     </div>
 
 </article>
@@ -141,16 +173,20 @@ Weapons - Lazarus Codex
 <article>
     <h1 id="subtitle">Launchers</h1>
     <div class="grid">
-            {% for weapon in weapons %}
-            {% if weapon.class == 'launcher' %}
-            <div class="weapon-cell pico">
-                <a href="/weapon/{{ weapon.id }}">
-                    {{ weapon.name }}<br>
-                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
-                </a>
-            </div>
-            {% endif %}
-            {% endfor %}
+        {% for weapon in weapons %}
+        {% if weapon.class == 'launcher' %}
+        <div class="weapon-cell pico">
+            <a href="/weapon/{{ weapon.id }}">
+                {{ weapon.name }}<br>
+                <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                {% if weapon.gamepass != 'none' and weapon.gamepass != '' %}
+                <img src="/static/images/star.png" alt="Requires Gamepass" class="gamepass-star"
+                    title='{{ weapon.gamepass }}'>
+                {% endif %}
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
     </div>
 
 </article>
@@ -158,16 +194,20 @@ Weapons - Lazarus Codex
 <article>
     <h1 id="subtitle">Wonder weapons</h1>
     <div class="grid">
-            {% for weapon in weapons %}
-            {% if weapon.class == 'wonderWeapon' %}
-            <div class="weapon-cell pico">
-                <a href="/weapon/{{ weapon.id }}">
-                    {{ weapon.name }}<br>
-                    <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
-                </a>
-            </div>
-            {% endif %}
-            {% endfor %}
+        {% for weapon in weapons %}
+        {% if weapon.class == 'wonderWeapon' %}
+        <div class="weapon-cell pico">
+            <a href="/weapon/{{ weapon.id }}">
+                {{ weapon.name }}<br>
+                <img src="{{ weapon.image }}" alt="{{ weapon.name }}" class="weapon-image">
+                {% if weapon.gamepass != 'none' and weapon.gamepass != '' %}
+                <img src="/static/images/star.png" alt="Requires Gamepass" class="gamepass-star"
+                    title='{{ weapon.gamepass }}'>
+                {% endif %}
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
     </div>
 
 </article>
