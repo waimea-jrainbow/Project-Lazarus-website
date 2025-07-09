@@ -6,8 +6,9 @@ Project lazarus is a roblox game based on call of duty zombies. I will be pullin
 
 This website will:
 
-- Have a introduction homepage with an updates feed and links to project lazarus related pages like the roblox page and the official discord
-- A page attached to a database that will list all the weapons in the game and the ability to open a detailed page for each separate weapon and must include how many rounds it will last
+- Have a introduction homepage with an updates feed and links to project lazarus related pages like the roblox page
+- A page attached to a database that will list all the weapons in the game and the ability to open a detailed page for each separate weapon
+- A page attached to a database that will list all the perks in the game 
 - A calculator for the damage dealt by weapons when multiplied by different multipliers
 
 ## Project Structure
@@ -49,7 +50,7 @@ This website will:
 - **.env-example** - Demo .env file
 - **.gitignore** - Prevents venv and .env from being pushed
 
-## Demo Database Schema
+## Database Schema
 
 The databases used for this website have the following schema:
 
@@ -64,18 +65,35 @@ CREATE TABLE `weapons` (
     'class' TEXT
     'notes' TEXT
     'price' INTEGER
+    'image' BLOB NOT NULL
+    'headshotMultiplier' INTEGER NOT NULL
+    'gamepass' TEXT NOT NULL DEFAULT 0
+    'extraDamage' INTEGER DEFAULT 0  
 );
 
-CREATE TABLE `weapons` (
+CREATE TABLE `packedWeapons` (
     'id' INTEGER PRIMARY KEY AUTOINCREMENT
-    'name' TEXT NOT NULL
+    'packedName' TEXT NOT NULL
     'magazineSize' INTEGER NOT NULL
     'totalAmmo' INTEGER NOT NULL
     'damage' INTEGER NOT NULL
     'rpm' INTEGER NOT NULL
-    'baseGun' TEXT
-    'module' TEXT
-    'notes' TEXT
+    'baseGun' TEXT NOT NULL
+    'module' TEXT NOT NULL
+    'notes' TEXT 
+    'baseWeaponId' INTEGER NOT NULL
+    'image' BLOB NOT NULL
+    'headshotMultiplier' INTEGER NOT NULL
+    'extraDamage' INTEGER DEFAULT 0
+);
+
+CREATE TABLE `perks` (
+    'id' INTEGER PRIMARY KEY AUTOINCREMENT
+    'NAME' TEXT
+    'price' INTEGER NOT NULL
+    'description' TEXT NOT NULL
+    'icon' BLOB NOT NULL
+    'machine' BLOB NOT NULL
 );
 
 
