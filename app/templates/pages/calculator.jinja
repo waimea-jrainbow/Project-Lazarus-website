@@ -20,8 +20,7 @@ Calculator - Lazarus Codex
 <h1 id="title">Project Lazarus: Weapon One-Shot Round Calculator</h1>
 <h5>This calculator will tell you what round a gun of your choice will one-shot the zombies till, Once a gun no longer
   one-shots it is probably a good time to change gun.</h5>
-<h2 id="subtitle">This calculator assumes you are getting headshots as you should be. <br>This calculator doesn't
-  account for percentage damage increases.</h2>
+<h2 id="subtitle">This calculator only calculates one shot on the directly hit zombie.</h2>
 <form method="POST">
   <label for="weapon_name">Enter weapon name:</label><br>
   <input type="text" name="weapon_name" id="weapon_name" required autocomplete="off">
@@ -30,6 +29,9 @@ Calculator - Lazarus Codex
 
   <input type="checkbox" id="double_tap" name="double_tap">
   <label for="double_tap">I have Double Tap Root Beer</label><br><br>
+
+  <input type="checkbox" id="headshot" name="headshot" Checked>
+  <label for="headshot">I am getting headshots</label><br><br>
 
   <input id="calculatorSubmit" type="submit" value="Calculate">
 </form>

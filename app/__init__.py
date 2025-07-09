@@ -100,36 +100,45 @@ def showCalculator():
     if request.method == 'POST':
         weapon_name = request.form.get('weapon_name', '').strip()
         double_tap = request.form.get('double_tap') == 'on'
+        headshot = request.form.get('headshot') == 'on'
         weapon = []
-        if weapon_name:
-            with connect_db() as client:
-                # Try to find the weapon in packedWeapons first
-                sql_packed = "SELECT packedName AS name, damage, headshotMultiplier, extraDamage FROM packedWeapons WHERE LOWER(packedName) = LOWER(?)"
-                params = [weapon_name]
-                result_packed = client.execute(sql_packed, params)
-                if hasattr(result_packed, 'rows') and result_packed.rows:
-                    weapon = result_packed.rows
-                else:
-                    # If not found in packedWeapons, try weapons table
-                    sql_base = "SELECT name, damage, headshotMultiplier, extraDamage FROM weapons WHERE LOWER(name) = LOWER(?)"
-                    result_base = client.execute(sql_base, params)
-                    if hasattr(result_base, 'rows'):
-                        weapon = result_base.rows
 
-            if weapon:
-                damage = weapon[0]['damage']
-                headshotMultiplier = weapon[0]['headshotMultiplier']
-                extraDamage = weapon[0]['extraDamage']
-                result = max_one_shot_round(damage, double_tap, headshotMultiplier, extraDamage)
+        if weapon_name:
+            lower_name = weapon_name.lower()
+
+            # Special cases
+            if lower_name in ['absolute zero', 'frostbite']:
+                result = str('∞')
+            elif lower_name == "iscariot's kiss":
+                double_tap = 0
+                result = max_round_iscariots_kiss(headshot, double_tap, headshotMultiplier=2.0)
             else:
-                error = f"Weapon '{weapon_name}' not found in weapon database."
+                with connect_db() as client:
+                    sql_packed = "SELECT packedName AS name, damage, headshotMultiplier, extraDamage FROM packedWeapons WHERE LOWER(packedName) = LOWER(?)"
+                    params = [weapon_name]
+                    result_packed = client.execute(sql_packed, params)
+                    if hasattr(result_packed, 'rows') and result_packed.rows:
+                        weapon = result_packed.rows
+                    else:
+                        sql_base = "SELECT name, damage, headshotMultiplier, extraDamage FROM weapons WHERE LOWER(name) = LOWER(?)"
+                        result_base = client.execute(sql_base, params)
+                        if hasattr(result_base, 'rows'):
+                            weapon = result_base.rows
+
+                if weapon:
+                    damage = weapon[0]['damage']
+                    headshotMultiplier = weapon[0]['headshotMultiplier']
+                    extraDamage = weapon[0]['extraDamage']
+                    result = max_one_shot_round(damage, double_tap, headshot , headshotMultiplier, extraDamage)
+                else:
+                    error = f"Weapon '{weapon_name}' not found in weapon database."
         else:
             error = "Please enter a weapon name."
 
     return render_template('pages/calculator.jinja', result=result, error=error)
 #---- Function to calculate the max round a gun can reach -------------------------------------------------------
-def max_one_shot_round(damage, double_tap,  headshotMultiplier,extraDamage ):
-    effective_damage =((damage + extraDamage) * (2 if double_tap else 1) * headshotMultiplier )
+def max_one_shot_round(damage, double_tap,headshot,  headshotMultiplier,extraDamage ):
+    effective_damage =((damage + extraDamage) * (2 if double_tap else 1) * (headshotMultiplier if headshot else 1))
     # print(damage, effective_damage, double_tap, headshotMultiplier)
     if effective_damage < 50:
         return 0
@@ -138,6 +147,24 @@ def max_one_shot_round(damage, double_tap,  headshotMultiplier,extraDamage ):
     else:
         return int(round((math.log(effective_damage / 950)) / math.log(1.1) + 9, 0))
 
+#---- Function to calculate the health of a zombie in a given round ---------------------------------------------
+def zombie_health(round_num):
+    if round_num < 10:
+        return 50 + 100 * round_num
+    else:
+        return 950 * (1.1 ** (round_num - 9))
+
+def max_round_iscariots_kiss(double_tap, headshot, headshotMultiplier):
+    round_num = 1
+    while True:
+        health = zombie_health(round_num)
+        base_damage = 3000 + (0.25 * health)
+        effective_damage = base_damage * (2 if double_tap else 1) * (headshotMultiplier if headshot else 1)
+
+        if effective_damage < health:
+            return round_num - 1
+
+        round_num += 1
 
 #---- Function to calculate the max round a gun can reach -------------------------------------------------------
 @app.get("/autocomplete")
